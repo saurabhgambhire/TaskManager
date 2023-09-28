@@ -25,7 +25,7 @@ public class UserCURDOps {
         if (userRepository.findById(user.getEmail()).isEmpty()) {
             user.setUserId(UUID.randomUUID().toString());
             userRepository.save(user);
-            twilioService.sendSMS(user.getMobile(), "Account Created Successfully");
+            twilioService.sendSMS(user.getMobile(), "Account Created Successfully : @Author : Saurabh Gambhire");
 
             return new StatusResponse(
                     true,
