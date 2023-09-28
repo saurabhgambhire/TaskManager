@@ -17,11 +17,16 @@ public class UserCURDOps {
     @Autowired
     private UserRepository userRepository;
 
+    @Autowired
+    private TwilioService twilioService;
+
 
     public StatusResponse save(User user) {
         if (userRepository.findById(user.getEmail()).isEmpty()) {
             user.setUserId(UUID.randomUUID().toString());
             userRepository.save(user);
+            twilioService.sendSMS(user.getMobile(), "Account Created Successfully");
+
             return new StatusResponse(
                     true,
                     "User Saved Successfully",

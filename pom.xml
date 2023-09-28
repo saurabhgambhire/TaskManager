@@ -37,6 +37,11 @@
             <optional>true</optional>
         </dependency>
         <dependency>
+            <groupId>com.twilio.sdk</groupId>
+            <artifactId>twilio</artifactId>
+            <version>8.31.0</version> <!-- Check for the latest version on Twilio's website -->
+        </dependency>
+        <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
