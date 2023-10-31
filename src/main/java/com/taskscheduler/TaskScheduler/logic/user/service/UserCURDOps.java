@@ -26,11 +26,11 @@ public class UserCURDOps {
         if (user.getUserId() == null)
             user.setUserId(UUID.randomUUID().toString());
 
-        Optional<User> byId = userRepository.findById(user.getUserId());
+
         return new StatusResponse(
                 true,
                 "User Saved successfully",
-                userRepository.save(byId.get())
+                userRepository.save(user)
         );
     }
 
