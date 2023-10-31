@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.text.SimpleDateFormat;
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -22,41 +23,22 @@ public class UserCURDOps {
 
 
     public StatusResponse save(User user) {
-        if (userRepository.findById(user.getEmail()).isEmpty()) {
+        if (user.getUserId() == null)
             user.setUserId(UUID.randomUUID().toString());
-            userRepository.save(user);
-//            twilioService.sendSMS(user.getMobile(), "\uD83C\uDF1F Welcome to TaskScheduler by Saurabh Gambhire! \uD83C\uDF1F\n" +
-//                    "\n" +
-//                    "Congratulations on joining our platform. Your account is now activated, and you're all set to manage your tasks efficiently!\n" +
-//                    "\n" +
-//                    "\uD83C\uDF08 TaskScheduler is here to simplify your life. Start organizing your tasks, setting goals, and achieving success with us.\n" +
-//                    "\n" +
-//                    "\uD83C\uDF1F Quote of the Day:\n" +
-//                    "'Life is a journey, and the journey itself is home.' - Saurabh Gambhire\n" +
-//                    "\n" +
-//                    "\uD83C\uDF89 Thank you for choosing TaskScheduler. Your productive journey begins now. If you ever need assistance, we're just a message away.\n" +
-//                    "\n" +
-//                        "\uD83C\uDF1F Happy Task Scheduling!");
 
-            return new StatusResponse(
-                    true,
-                    "User Saved Successfully",
-                    user
-            );
-        }
 
         return new StatusResponse(
-                false,
-                "A user with that E-mail already exists"
+                true,
+                "User Saved successfully",
+                userRepository.save(user)
         );
-
     }
 
     public StatusResponse login(String email, String password) {
 
-        Optional<User> byId = userRepository.findById(email);
+        User user = userRepository.findByEmailAndPassword(email, password);
 
-        if (byId.isEmpty() || !byId.get().getPassword().equals(password)) {
+        if (user == null) {
             return new StatusResponse(
                     false,
                     "Incorrect username or password"
@@ -66,7 +48,7 @@ public class UserCURDOps {
         return new StatusResponse(
                 true,
                 "Login Request Succeeded",
-                byId
+                user
         );
     }
 

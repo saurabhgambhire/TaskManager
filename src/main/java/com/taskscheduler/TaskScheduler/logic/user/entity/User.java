@@ -10,10 +10,9 @@ import lombok.Data;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class User {
 
-    @Column(unique = true)
+    @Id
     private String userId;
     private String name;
-    @Id
     private String email;
     private String mobile;
     private String password;

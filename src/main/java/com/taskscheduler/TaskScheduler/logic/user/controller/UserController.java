@@ -30,6 +30,10 @@ public class UserController {
         return userCURDOps.deleteUser(email, password);
     }
 
+    @PutMapping("/update")
+    StatusResponse updateUser(@RequestBody User user) {
+        return userCURDOps.save(user);
+    }
 
 
 }
