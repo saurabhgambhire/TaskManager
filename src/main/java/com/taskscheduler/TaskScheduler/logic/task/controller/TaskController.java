@@ -8,9 +8,9 @@ import org.springframework.web.bind.annotation.*;
 
 import java.text.ParseException;
 
-@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("/task")
+@CrossOrigin(origins = "*")
 public class TaskController {
 
     @Autowired
