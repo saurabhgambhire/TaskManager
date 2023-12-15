@@ -12,8 +12,12 @@ import org.springframework.web.bind.annotation.*;
 @CrossOrigin(origins = "*")
 public class UserController {
 
+    private final UserCURDOps userCURDOps;
+
     @Autowired
-    private UserCURDOps userCURDOps;
+    public UserController(UserCURDOps userCURDOps) {
+        this.userCURDOps = userCURDOps;
+    }
 
 
     @PostMapping("/signup")
